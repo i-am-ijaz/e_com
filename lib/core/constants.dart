@@ -1,0 +1,1 @@
+const kAppName = 'E-Com';
