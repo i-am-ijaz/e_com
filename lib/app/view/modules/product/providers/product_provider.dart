@@ -16,8 +16,6 @@ class ProductProvider extends _$ProductProvider {
 
   Future<void> add(Product product, List<XFile> images) async {
     try {
-      await ProductRepository.create(product);
-
       if (images.isEmpty) return;
 
       final productImages = <String>[];
@@ -29,7 +27,7 @@ class ProductProvider extends _$ProductProvider {
       }
 
       product = product.copyWith(images: productImages);
-      await ProductRepository.update(product);
+      await ProductRepository.create(product);
     } catch (e) {
       AppExceptionHandler().handleException(e, StackTrace.current);
     }

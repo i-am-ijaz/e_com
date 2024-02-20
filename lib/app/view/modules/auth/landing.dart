@@ -1,5 +1,5 @@
 import 'package:e_com/app/view/modules/auth/screens/auth_screen.dart';
-import 'package:e_com/app/view/modules/home/admin_home.dart';
+import 'package:e_com/app/view/modules/home/home.dart';
 import 'package:e_com/core/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

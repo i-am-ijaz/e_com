@@ -83,5 +83,14 @@ class AppTheme {
             shape: const RoundedRectangleBorder(),
           ),
         ),
+        checkboxTheme: CheckboxThemeData(
+          checkColor: MaterialStateProperty.all(kWhiteColor),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(1),
+          ),
+          side: const BorderSide(
+            width: 2,
+          ),
+        ),
       );
 }
