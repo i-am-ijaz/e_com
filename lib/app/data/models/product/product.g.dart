@@ -14,7 +14,7 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
       description: json['description'] as String,
       price: (json['price'] as num).toDouble(),
-      category: Category.fromJson(json['category'] as Map<String, dynamic>),
+      category: json['category'] as String,
       optionCategories: (json['optionCategories'] as List<dynamic>)
           .map((e) => OptionCategory.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -28,5 +28,6 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'description': instance.description,
       'price': instance.price,
       'category': instance.category,
-      'optionCategories': instance.optionCategories,
+      'optionCategories':
+          instance.optionCategories.map((e) => e.toJson()).toList(),
     };

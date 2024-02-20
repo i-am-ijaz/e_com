@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:e_com/app/view/theme/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   AppTheme._();
@@ -20,6 +21,37 @@ class AppTheme {
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: kBlackColor,
           foregroundColor: kWhiteColor,
+        ),
+        fontFamily: GoogleFonts.inter().fontFamily,
+        primaryTextTheme: GoogleFonts.interTextTheme(),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(
+            color: kBlackColor,
+          ),
+          bodyMedium: TextStyle(
+            color: kBlackColor,
+          ),
+          bodySmall: TextStyle(
+            color: kBlackColor,
+          ),
+          displayLarge: TextStyle(
+            color: kBlackColor,
+          ),
+          displayMedium: TextStyle(
+            color: kBlackColor,
+          ),
+          displaySmall: TextStyle(
+            color: kBlackColor,
+          ),
+          headlineLarge: TextStyle(
+            color: kBlackColor,
+          ),
+          headlineMedium: TextStyle(
+            color: kBlackColor,
+          ),
+          headlineSmall: TextStyle(
+            color: kBlackColor,
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -48,6 +80,7 @@ class AppTheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: kBlackColor,
+            shape: const RoundedRectangleBorder(),
           ),
         ),
       );

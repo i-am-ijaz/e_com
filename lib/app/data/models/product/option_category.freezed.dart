@@ -21,7 +21,7 @@ OptionCategory _$OptionCategoryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OptionCategory {
   String get title => throw _privateConstructorUsedError;
-  List<Option> get categoryOptions => throw _privateConstructorUsedError;
+  List<Option> get options => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $OptionCategoryCopyWith<$Res> {
           OptionCategory value, $Res Function(OptionCategory) then) =
       _$OptionCategoryCopyWithImpl<$Res, OptionCategory>;
   @useResult
-  $Res call({String title, List<Option> categoryOptions});
+  $Res call({String title, List<Option> options});
 }
 
 /// @nodoc
@@ -52,16 +52,16 @@ class _$OptionCategoryCopyWithImpl<$Res, $Val extends OptionCategory>
   @override
   $Res call({
     Object? title = null,
-    Object? categoryOptions = null,
+    Object? options = null,
   }) {
     return _then(_value.copyWith(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryOptions: null == categoryOptions
-          ? _value.categoryOptions
-          : categoryOptions // ignore: cast_nullable_to_non_nullable
+      options: null == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
               as List<Option>,
     ) as $Val);
   }
@@ -75,7 +75,7 @@ abstract class _$$OptionCategoryImplCopyWith<$Res>
       __$$OptionCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, List<Option> categoryOptions});
+  $Res call({String title, List<Option> options});
 }
 
 /// @nodoc
@@ -90,16 +90,16 @@ class __$$OptionCategoryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = null,
-    Object? categoryOptions = null,
+    Object? options = null,
   }) {
     return _then(_$OptionCategoryImpl(
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryOptions: null == categoryOptions
-          ? _value._categoryOptions
-          : categoryOptions // ignore: cast_nullable_to_non_nullable
+      options: null == options
+          ? _value._options
+          : options // ignore: cast_nullable_to_non_nullable
               as List<Option>,
     ));
   }
@@ -109,25 +109,25 @@ class __$$OptionCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OptionCategoryImpl implements _OptionCategory {
   _$OptionCategoryImpl(
-      {required this.title, required final List<Option> categoryOptions})
-      : _categoryOptions = categoryOptions;
+      {required this.title, required final List<Option> options})
+      : _options = options;
 
   factory _$OptionCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$OptionCategoryImplFromJson(json);
 
   @override
   final String title;
-  final List<Option> _categoryOptions;
+  final List<Option> _options;
   @override
-  List<Option> get categoryOptions {
-    if (_categoryOptions is EqualUnmodifiableListView) return _categoryOptions;
+  List<Option> get options {
+    if (_options is EqualUnmodifiableListView) return _options;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categoryOptions);
+    return EqualUnmodifiableListView(_options);
   }
 
   @override
   String toString() {
-    return 'OptionCategory(title: $title, categoryOptions: $categoryOptions)';
+    return 'OptionCategory(title: $title, options: $options)';
   }
 
   @override
@@ -136,14 +136,13 @@ class _$OptionCategoryImpl implements _OptionCategory {
         (other.runtimeType == runtimeType &&
             other is _$OptionCategoryImpl &&
             (identical(other.title, title) || other.title == title) &&
-            const DeepCollectionEquality()
-                .equals(other._categoryOptions, _categoryOptions));
+            const DeepCollectionEquality().equals(other._options, _options));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, title,
-      const DeepCollectionEquality().hash(_categoryOptions));
+  int get hashCode => Object.hash(
+      runtimeType, title, const DeepCollectionEquality().hash(_options));
 
   @JsonKey(ignore: true)
   @override
@@ -163,7 +162,7 @@ class _$OptionCategoryImpl implements _OptionCategory {
 abstract class _OptionCategory implements OptionCategory {
   factory _OptionCategory(
       {required final String title,
-      required final List<Option> categoryOptions}) = _$OptionCategoryImpl;
+      required final List<Option> options}) = _$OptionCategoryImpl;
 
   factory _OptionCategory.fromJson(Map<String, dynamic> json) =
       _$OptionCategoryImpl.fromJson;
@@ -171,7 +170,7 @@ abstract class _OptionCategory implements OptionCategory {
   @override
   String get title;
   @override
-  List<Option> get categoryOptions;
+  List<Option> get options;
   @override
   @JsonKey(ignore: true)
   _$$OptionCategoryImplCopyWith<_$OptionCategoryImpl> get copyWith =>

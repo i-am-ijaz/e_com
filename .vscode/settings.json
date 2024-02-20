@@ -3,6 +3,7 @@
         "cupertino",
         "firestore",
         "Fluttertoast",
-        "riverpod"
+        "riverpod",
+        "unfocus"
     ]
 }

@@ -8,7 +8,4 @@ class SvgAssets {
 
   static const String phoneIcon = '$_icons/phone_icon.svg';
   static const String whatsAppIcon = '$_icons/whatsapp_icon.svg';
-
-
-  
 }

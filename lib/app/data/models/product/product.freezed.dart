@@ -25,7 +25,7 @@ mixin _$Product {
   List<String> get images => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
-  Category get category => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   List<OptionCategory> get optionCategories =>
       throw _privateConstructorUsedError;
 
@@ -45,10 +45,8 @@ abstract class $ProductCopyWith<$Res> {
       List<String> images,
       String description,
       double price,
-      Category category,
+      String category,
       List<OptionCategory> optionCategories});
-
-  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -96,20 +94,12 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Category,
+              as String,
       optionCategories: null == optionCategories
           ? _value.optionCategories
           : optionCategories // ignore: cast_nullable_to_non_nullable
               as List<OptionCategory>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CategoryCopyWith<$Res> get category {
-    return $CategoryCopyWith<$Res>(_value.category, (value) {
-      return _then(_value.copyWith(category: value) as $Val);
-    });
   }
 }
 
@@ -126,11 +116,8 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       List<String> images,
       String description,
       double price,
-      Category category,
+      String category,
       List<OptionCategory> optionCategories});
-
-  @override
-  $CategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -176,7 +163,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Category,
+              as String,
       optionCategories: null == optionCategories
           ? _value._optionCategories
           : optionCategories // ignore: cast_nullable_to_non_nullable
@@ -219,7 +206,7 @@ class _$ProductImpl implements _Product {
   @override
   final double price;
   @override
-  final Category category;
+  final String category;
   final List<OptionCategory> _optionCategories;
   @override
   List<OptionCategory> get optionCategories {
@@ -284,7 +271,7 @@ abstract class _Product implements Product {
       required final List<String> images,
       required final String description,
       required final double price,
-      required final Category category,
+      required final String category,
       required final List<OptionCategory> optionCategories}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
@@ -300,7 +287,7 @@ abstract class _Product implements Product {
   @override
   double get price;
   @override
-  Category get category;
+  String get category;
   @override
   List<OptionCategory> get optionCategories;
   @override

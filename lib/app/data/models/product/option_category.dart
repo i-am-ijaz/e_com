@@ -9,7 +9,7 @@ part 'option_category.g.dart';
 class OptionCategory with _$OptionCategory {
   factory OptionCategory({
     required String title,
-    required List<Option> categoryOptions,
+    required List<Option> options,
   }) = _OptionCategory;
 
   factory OptionCategory.fromJson(Map<String, dynamic> json) =>

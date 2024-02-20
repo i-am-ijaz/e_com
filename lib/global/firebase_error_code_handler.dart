@@ -1,4 +1,3 @@
-
 import 'package:e_com/global/enum/firebase_enums.dart';
 
 class FirebaseErrorCodeHandler {
@@ -54,7 +53,7 @@ class FirebaseErrorCodeHandler {
   static String getMessage(FirebaseErrorCode code) {
     switch (code) {
       case FirebaseErrorCode.invalidCredential:
-      return 'Invalid credentials. Please try again.';
+        return 'Invalid credentials. Please try again.';
       case FirebaseErrorCode.invalidEmail:
         return 'The email address is not valid.';
       case FirebaseErrorCode.userNotFound:

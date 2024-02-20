@@ -9,7 +9,7 @@ part of 'option_category.dart';
 _$OptionCategoryImpl _$$OptionCategoryImplFromJson(Map<String, dynamic> json) =>
     _$OptionCategoryImpl(
       title: json['title'] as String,
-      categoryOptions: (json['categoryOptions'] as List<dynamic>)
+      options: (json['options'] as List<dynamic>)
           .map((e) => Option.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -18,5 +18,5 @@ Map<String, dynamic> _$$OptionCategoryImplToJson(
         _$OptionCategoryImpl instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'categoryOptions': instance.categoryOptions,
+      'options': instance.options.map((e) => e.toJson()).toList(),
     };

@@ -1,18 +1,23 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:e_com/app/data/models/product/product.dart';
+import 'package:e_com/app/view/modules/product/providers/category_provider.dart';
 import 'package:e_com/app/view/modules/product/providers/product_provider.dart';
+import 'package:e_com/app/view/modules/product/view/add_category_dialog.dart';
 import 'package:e_com/app/view/modules/product/view/add_options_dialog.dart';
 import 'package:e_com/app/view/theme/colors.dart';
 import 'package:e_com/assets/assets.dart';
 import 'package:e_com/core/extensions.dart';
 import 'package:e_com/core/services/media_service.dart';
+import 'package:e_com/core/utils.dart';
 
 class ProductAddDialog extends ConsumerStatefulWidget {
   const ProductAddDialog({super.key});
@@ -22,18 +27,38 @@ class ProductAddDialog extends ConsumerStatefulWidget {
 }
 
 class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
+  late TextEditingController _nameController;
+  late TextEditingController _descriptionController;
+  late TextEditingController _priceController;
+
   List<XFile> _pickedImages = [];
 
-  Product? _product;
+  Product _product = Product.empty();
+
+  String _category = 'Category';
+  List<String> _categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController();
+    _descriptionController = TextEditingController();
+    _priceController = TextEditingController();
+  }
 
   @override
   void dispose() {
     super.dispose();
     _pickedImages.clear();
+    _nameController.dispose();
+    _descriptionController.dispose();
+    _priceController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    _categories = ref.watch(categoryProviderProvider).value ?? [];
+
     return SafeArea(
       child: AlertDialog(
         insetPadding: EdgeInsets.zero,
@@ -57,7 +82,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                   Text(
                     'Images',
                     style: context.textTheme.titleLarge!.copyWith(
-                      color: const Color(0xFF525252),
+                      color: kSecondaryTextColor,
                       fontWeight: FontWeight.w600,
                       fontSize: 20,
                     ),
@@ -98,7 +123,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                                       child: const CircleAvatar(
                                         radius: 13,
                                         backgroundColor: kWhiteColor,
-                                        foregroundColor: Color(0xFF525252),
+                                        foregroundColor: kSecondaryTextColor,
                                         child: Icon(
                                           Icons.add,
                                           size: 16,
@@ -151,7 +176,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                                       child: const CircleAvatar(
                                         radius: 13,
                                         backgroundColor: kWhiteColor,
-                                        foregroundColor: Color(0xFF525252),
+                                        foregroundColor: kSecondaryTextColor,
                                         child: Icon(
                                           Icons.delete_outline,
                                           size: 16,
@@ -167,6 +192,8 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                   const Gap(12),
                   ElevatedButton(
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
+
                       MediaService().pickImages().then((value) {
                         setState(() {
                           if (_pickedImages.isEmpty) {
@@ -184,12 +211,17 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                     children: [
                       Expanded(
                         child: SizedBox(
-                          height: 32,
+                          height: 35,
                           child: TextFormField(
+                            controller: _nameController,
                             decoration: const InputDecoration(
                               hintText: 'Name of the Product',
                               hintStyle: TextStyle(
-                                fontSize: 10,
+                                fontSize: 14,
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 2,
+                                horizontal: 12,
                               ),
                             ),
                           ),
@@ -198,15 +230,35 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                       const Gap(12),
                       Expanded(
                         child: SizedBox(
-                          height: 32,
+                          height: 35,
                           child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Row(
+                            onPressed: () {
+                              FocusScope.of(context).unfocus();
+
+                              showDialog(
+                                context: context,
+                                builder: (context) => CategoryPickerDialog(
+                                  onCategorySelected: (category) {
+                                    setState(() {
+                                      _category = category;
+                                    });
+                                  },
+                                  selectedCategory: _category,
+                                  categories: _categories,
+                                ),
+                              );
+                            },
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Category'),
-                                Spacer(),
-                                Icon(Icons.keyboard_arrow_down_sharp),
+                                Expanded(
+                                  child: Text(
+                                    _category,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                const Gap(8),
+                                const Icon(Icons.keyboard_arrow_down_sharp),
                               ],
                             ),
                           ),
@@ -216,28 +268,51 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                   ),
                   const Gap(16),
                   TextFormField(
+                    controller: _descriptionController,
                     maxLines: 3,
                     decoration: const InputDecoration(
                       hintText: 'Description',
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 12,
+                      ),
                     ),
                   ),
                   const Gap(12),
                   TextFormField(
+                    controller: _priceController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'^(\d+)?\.?\d{0,2}'),
+                      ),
+                      LengthLimitingTextInputFormatter(5),
+                    ],
                     decoration: const InputDecoration(
                       hintText: 'Price',
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: 12,
+                      ),
                     ),
                   ),
                   const Gap(12),
                   ElevatedButton(
-                    onPressed: () {
-                      showDialog(
+                    onPressed: () async {
+                      FocusScope.of(context).unfocus();
+
+                      final optionCategories = await showDialog(
                         context: context,
                         builder: (context) => const AddOptionsDialog(),
+                      );
+                      if (optionCategories == null) return;
+                      _product = _product.copyWith(
+                        optionCategories: optionCategories,
                       );
                     },
                     child: const Text('Add Options'),
                   ),
-                  const Gap(60),
+                  const Gap(50),
                 ],
               ),
             ),
@@ -254,13 +329,41 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
           ),
           TextButton(
             onPressed: () async {
-              if (_product == null) {
+              FocusScope.of(context).unfocus();
+
+              if (_pickedImages.isEmpty) {
+                showToast('Please select at least one image');
                 return;
               }
 
+              if (_nameController.text.trim().isEmpty) {
+                showToast('Please enter name of the product');
+                return;
+              }
+
+              if (_priceController.text.trim().isEmpty) {
+                showToast('Please enter price of the product');
+                return;
+              }
+
+              if (_category == 'Category' || _category.isEmpty) {
+                showToast('Please select category');
+                return;
+              }
+
+              final product = _product.copyWith(
+                docId: const Uuid().v4(),
+                name: _nameController.text.trim(),
+                description: _descriptionController.text.trim(),
+                price: double.tryParse(_priceController.text) ?? 0.0,
+                category: _category,
+              );
+
+              _createNewCategoryIfNotExits();
+
               await ref
                   .read(productProviderProvider.notifier)
-                  .addProduct(_product!);
+                  .add(product, _pickedImages);
 
               if (!mounted) return;
               Navigator.pop(context);
@@ -270,5 +373,9 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
         ],
       ),
     );
+  }
+
+  void _createNewCategoryIfNotExits() {
+    ref.read(categoryProviderProvider.notifier).addCategory(_category);
   }
 }
