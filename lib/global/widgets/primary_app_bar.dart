@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
+
 import 'package:e_com/app/view/modules/auth/providers/auth_provider.dart';
 import 'package:e_com/app/view/theme/colors.dart';
 import 'package:e_com/assets/assets.dart';
 import 'package:e_com/core/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PrimaryAppBar({super.key});
@@ -15,6 +17,10 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: kBlackColor,
       title: const Text(
         'Business Name',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+        ),
       ),
       actions: [
         IconButton(
