@@ -74,4 +74,18 @@ class ProductRepository {
       );
     }
   }
+
+  static Future<Product?> getProductById(String docId) async {
+    try {
+      return _productsRef.doc(docId).get().then((value) {
+        if (!value.exists) return null;
+        return Product.fromJson(value.data()!);
+      });
+    } on FirebaseException catch (e) {
+      throw AppException(
+        message: e.message ?? '',
+        title: 'Error getting product',
+      );
+    }
+  }
 }

@@ -19,4 +19,14 @@ class UserProvider extends _$UserProvider {
     }
     return null;
   }
+
+  // Create User
+  Future<void> createUser(String email) async {
+    try {
+      final uid = AuthService().currentUser!.uid;
+      await UserRepository().create(email, uid);
+    } catch (e) {
+      e.logError();
+    }
+  }
 }

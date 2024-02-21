@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
+
+import 'package:e_com/app/data/providers/user_provider.dart';
 import 'package:e_com/app/view/modules/auth/providers/auth_provider.dart';
 import 'package:e_com/core/extensions.dart';
 import 'package:e_com/core/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
@@ -83,6 +86,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       await ref.read(authProviderProvider.notifier).register(
                             _emailController.text,
                             _passwordController.text,
+                          );
+                      await ref.read(userProviderProvider.notifier).createUser(
+                            _emailController.text,
                           );
                     }
                   },

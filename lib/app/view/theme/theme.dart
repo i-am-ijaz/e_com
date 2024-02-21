@@ -11,7 +11,6 @@ class AppTheme {
   );
 
   static ThemeData get lightTheme => ThemeData(
-        primaryColor: kBlackColor,
         useMaterial3: false,
         scaffoldBackgroundColor: kWhiteColor,
         appBarTheme: const AppBarTheme(

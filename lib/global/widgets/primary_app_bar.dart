@@ -29,17 +29,22 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           icon: SvgPicture.asset(SvgAssets.phoneIcon),
         ),
+        IconButton(
+          onPressed: () async {
+            const number = '+1 555-555-5555';
+            final url =
+                'whatsapp://send?phone=$number&text=${Uri.encodeFull('Hello!')}';
+            await appLunchUrl(url);
+          },
+          icon: SvgPicture.asset(SvgAssets.whatsAppIcon),
+        ),
         Consumer(
           builder: (context, ref, child) {
             return IconButton(
               onPressed: () async {
-                const number = '+1 555-555-5555';
-                final url =
-                    'whatsapp://send?phone=$number&text=${Uri.encodeFull('Hello!')}';
-                await appLunchUrl(url);
                 await ref.read(authProviderProvider.notifier).logout();
               },
-              icon: SvgPicture.asset(SvgAssets.whatsAppIcon),
+              icon: const Icon(Icons.logout_outlined),
             );
           },
         ),

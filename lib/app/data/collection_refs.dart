@@ -5,7 +5,7 @@ class CollectionRefs {
   static const String _users = 'users';
   static const String _products = 'products';
   static const String _categories = 'categories';
-  static const String _cartItems = 'cartItems';
+  static const String _cartProducts = 'cartProducts';
 
   final _db = FirebaseFirestore.instance;
   final _uid = FirebaseAuth.instance.currentUser!.uid;
@@ -16,6 +16,6 @@ class CollectionRefs {
   CollectionReference<Map<String, dynamic>> get categories =>
       _db.collection(_categories);
 
-  CollectionReference<Map<String, dynamic>> get cartItems =>
-      users.doc(_uid).collection(_cartItems);
+  CollectionReference<Map<String, dynamic>> get cartProducts =>
+      users.doc(_uid).collection(_cartProducts);
 }

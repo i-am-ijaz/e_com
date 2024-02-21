@@ -1,12 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_com/app/data/models/product/option.dart';
-import 'package:e_com/app/view/theme/colors.dart';
-import 'package:e_com/core/extensions.dart';
+import 'package:e_com/app/data/models/cart/cart_product.dart';
+import 'package:e_com/app/view/modules/cart/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:e_com/app/data/models/product/product.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+
+import 'package:e_com/app/data/models/product/option.dart';
+import 'package:e_com/app/data/models/product/product.dart';
+import 'package:e_com/app/view/modules/cart/cart_dialog.dart';
+import 'package:e_com/app/view/theme/colors.dart';
+import 'package:e_com/core/extensions.dart';
 
 class CheckoutDialog extends StatefulWidget {
   const CheckoutDialog({
@@ -150,11 +154,30 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                     },
                   ),
                 const Gap(30),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+                Consumer(
+                  builder: (context, ref, child) {
+                    return ElevatedButton(
+                      onPressed: () async {
+                        final cartProduct = CartProduct(
+                          productId: widget.product.docId,
+                          options: _selectedOptions,
+                        );
+                        ref
+                            .read(cartProviderProvider.notifier)
+                            .addToCart(cartProduct)
+                            .whenComplete(() {
+                          if (mounted) {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (context) => const CartDialog(),
+                            );
+                          }
+                        });
+                      },
+                      child: Text('Save \$${totalPrice.toStringAsFixed(2)}'),
+                    );
                   },
-                  child: Text('Save \$${totalPrice.toStringAsFixed(2)}'),
                 ),
               ],
             ),

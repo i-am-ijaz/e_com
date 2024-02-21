@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:e_com/core/extensions.dart';
 import 'package:e_com/core/utils.dart';
-import 'package:flutter/material.dart';
 
 class CategoryPickerDialog extends StatefulWidget {
   const CategoryPickerDialog({

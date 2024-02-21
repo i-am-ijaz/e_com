@@ -1,25 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_provider.dart';
+part of 'cart_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userProviderHash() => r'915fd47e5c970e274d6ceb80cd0d399d0602e209';
+String _$cartProviderHash() => r'f5fd02cd72fc96510fe491904afc42e00620f582';
 
-/// See also [UserProvider].
-@ProviderFor(UserProvider)
-final userProviderProvider =
-    AutoDisposeAsyncNotifierProvider<UserProvider, AppUser?>.internal(
-  UserProvider.new,
-  name: r'userProviderProvider',
+/// See also [CartProvider].
+@ProviderFor(CartProvider)
+final cartProviderProvider =
+    AutoDisposeStreamNotifierProvider<CartProvider, Cart?>.internal(
+  CartProvider.new,
+  name: r'cartProviderProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userProviderHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$cartProviderHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$UserProvider = AutoDisposeAsyncNotifier<AppUser?>;
+typedef _$CartProvider = AutoDisposeStreamNotifier<Cart?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
