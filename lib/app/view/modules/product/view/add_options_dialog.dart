@@ -1,3 +1,4 @@
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:gap/gap.dart';
@@ -58,11 +59,11 @@ class _AddOptionsDialogState extends State<AddOptionsDialog> {
                         ),
                         const Gap(8),
                         if (productOption.options.isEmpty) ...[
-                          ElevatedButton(
+                          PrimaryAppButton(
                             onPressed: () {
                               _addNewOption(productOption, context, index);
                             },
-                            child: const Text('New Option'),
+                            text: 'New Option',
                           ),
                           const Gap(12),
                         ] else
@@ -129,7 +130,7 @@ class _AddOptionsDialogState extends State<AddOptionsDialog> {
                                   ),
                                   const Gap(8),
                                   if (i == productOption.options.length - 1)
-                                    ElevatedButton(
+                                    PrimaryAppButton(
                                       onPressed: () {
                                         _addNewOption(
                                           productOption,
@@ -137,7 +138,7 @@ class _AddOptionsDialogState extends State<AddOptionsDialog> {
                                           index,
                                         );
                                       },
-                                      child: const Text('New Option'),
+                                      text: 'New Option',
                                     ),
                                 ],
                               );
@@ -148,9 +149,9 @@ class _AddOptionsDialogState extends State<AddOptionsDialog> {
                   },
                 ),
                 const Gap(60),
-                ElevatedButton(
+                PrimaryAppButton(
                   onPressed: _addCategoryOption,
-                  child: const Text('New Category'),
+                  text: 'New Category',
                 ),
               ],
             ),

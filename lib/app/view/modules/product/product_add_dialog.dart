@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -190,7 +191,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                           ),
                   ),
                   const Gap(12),
-                  ElevatedButton(
+                  PrimaryAppButton(
                     onPressed: () {
                       FocusScope.of(context).unfocus();
 
@@ -204,7 +205,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                         });
                       });
                     },
-                    child: const Text('Select Images'),
+                    text: 'Select Images',
                   ),
                   const Gap(16),
                   Row(
@@ -297,7 +298,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                     ),
                   ),
                   const Gap(12),
-                  ElevatedButton(
+                  PrimaryAppButton(
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
 
@@ -310,7 +311,7 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                         optionCategories: optionCategories,
                       );
                     },
-                    child: const Text('Add Options'),
+                    text: 'Add Options',
                   ),
                   const Gap(50),
                 ],

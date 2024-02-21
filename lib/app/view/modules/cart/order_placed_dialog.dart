@@ -1,3 +1,4 @@
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -34,13 +35,11 @@ class OrderPlacedDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const Gap(20),
-              ElevatedButton(
+              PrimaryAppButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'Excellent',
-                ),
+                text: 'Excellent',
               ),
             ],
           ),

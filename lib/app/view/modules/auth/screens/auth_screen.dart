@@ -1,3 +1,4 @@
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -69,14 +70,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                   ),
                 ),
                 const Gap(32),
-                ElevatedButton(
+                PrimaryAppButton(
+                  isLoading: ref.watch(authProviderProvider).isLoading,
                   onPressed: () async {
                     if (_emailController.text.trim().isEmpty ||
                         _passwordController.text.isEmpty) {
                       showToast('Please fill in all fields');
                       return;
                     }
-
+                    if (ref.watch(authProviderProvider).isLoading) return;
                     if (_isLogin) {
                       await ref.read(authProviderProvider.notifier).login(
                             _emailController.text,
@@ -92,7 +94,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                           );
                     }
                   },
-                  child: Text(_isLogin ? 'Login' : 'Register'),
+                  text: _isLogin ? 'Login' : 'Register',
                 ),
                 TextButton(
                   onPressed: toggleLogin,

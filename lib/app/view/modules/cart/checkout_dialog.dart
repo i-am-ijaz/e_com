@@ -1,5 +1,6 @@
 import 'package:e_com/app/data/models/cart/cart_product.dart';
 import 'package:e_com/app/view/modules/cart/providers/cart_provider.dart';
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -156,7 +157,8 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                 const Gap(30),
                 Consumer(
                   builder: (context, ref, child) {
-                    return ElevatedButton(
+                    return PrimaryAppButton(
+                      isLoading: ref.watch(cartProviderProvider).isLoading,
                       onPressed: () async {
                         final cartProduct = CartProduct(
                           productId: widget.product.docId,
@@ -175,7 +177,7 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
                           }
                         });
                       },
-                      child: Text('Save \$${totalPrice.toStringAsFixed(2)}'),
+                      text: 'Save \$${totalPrice.toStringAsFixed(2)}',
                     );
                   },
                 ),

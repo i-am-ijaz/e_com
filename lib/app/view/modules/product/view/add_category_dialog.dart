@@ -1,3 +1,4 @@
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_com/core/extensions.dart';
@@ -83,9 +84,9 @@ class _CategoryPickerDialogState extends State<CategoryPickerDialog> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                ElevatedButton(
+                PrimaryAppButton(
+                  text: 'Add',
                   onPressed: _handleAddNewCategory,
-                  child: const Text('Add'),
                 ),
               ],
             ),

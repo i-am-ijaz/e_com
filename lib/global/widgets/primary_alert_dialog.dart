@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:e_com/global/widgets/primary_app_button.dart';
+
 class PrimaryAlertDialog extends StatelessWidget {
   const PrimaryAlertDialog({
     super.key,
@@ -23,9 +25,9 @@ class PrimaryAlertDialog extends StatelessWidget {
           },
           child: const Text('Cancel'),
         ),
-        ElevatedButton(
+        PrimaryAppButton(
           onPressed: onPressed,
-          child: const Text('Yes'),
+          text: 'Yes',
         ),
       ],
     );

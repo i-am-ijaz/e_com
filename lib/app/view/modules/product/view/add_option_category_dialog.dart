@@ -1,3 +1,4 @@
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,7 +57,7 @@ class _AddOptionCategoryDialogState extends State<AddOptionCategoryDialog> {
               ),
             ),
             const Gap(8),
-            ElevatedButton(
+            PrimaryAppButton(
               onPressed: () {
                 FocusScope.of(context).unfocus();
 
@@ -70,7 +71,7 @@ class _AddOptionCategoryDialogState extends State<AddOptionCategoryDialog> {
                   );
                 }
               },
-              child: const Text('Add'),
+              text: 'Add',
             ),
           ],
         ),

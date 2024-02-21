@@ -1,3 +1,4 @@
+import 'package:e_com/global/widgets/primary_app_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -71,9 +72,11 @@ class _CartDialogState extends ConsumerState<CartDialog> {
             maxHeight: MediaQuery.of(context).size.height * 0.8,
           ),
           child: _isLoading
-              ? const Center(child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(kBlackColor),
-              ))
+              ? const Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(kBlackColor),
+                  ),
+                )
               : SingleChildScrollView(
                   child: Consumer(
                     builder: (context, ref, child) {
@@ -166,7 +169,9 @@ class _CartDialogState extends ConsumerState<CartDialog> {
                                 ),
                               ),
                               const Gap(30),
-                              ElevatedButton(
+                              PrimaryAppButton(
+                                isLoading:
+                                    ref.watch(cartProviderProvider).isLoading,
                                 onPressed: _selectedRetrievedCartProducts
                                         .isEmpty
                                     ? null
@@ -182,11 +187,9 @@ class _CartDialogState extends ConsumerState<CartDialog> {
                                           },
                                         );
                                       },
-                                child: Text(
-                                  _selectedRetrievedCartProducts.isEmpty
-                                      ? 'Pay \$${0.0}'
-                                      : 'Pay \$${totalPrice.toStringAsFixed(2)}',
-                                ),
+                                text: _selectedRetrievedCartProducts.isEmpty
+                                    ? 'Pay \$${0.0}'
+                                    : 'Pay \$${totalPrice.toStringAsFixed(2)}',
                               ),
                             ],
                           );
