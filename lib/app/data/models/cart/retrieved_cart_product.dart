@@ -7,11 +7,11 @@ part 'retrieved_cart_product.g.dart';
 
 @freezed
 class RetrievedCartProduct with _$RetrievedCartProduct {
-
   factory RetrievedCartProduct({
     required Product product,
     required List<Option> options,
   }) = _RetrievedCartProduct;
 
-  factory RetrievedCartProduct.fromJson(Map<String, dynamic> json) => _$RetrievedCartProductFromJson(json);
+  factory RetrievedCartProduct.fromJson(Map<String, dynamic> json) =>
+      _$RetrievedCartProductFromJson(json);
 }
