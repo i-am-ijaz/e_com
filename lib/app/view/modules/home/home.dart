@@ -8,7 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:e_com/app/data/models/app_user/app_user.dart';
 import 'package:e_com/app/data/models/product/product.dart';
 import 'package:e_com/app/data/providers/user_provider.dart';
-import 'package:e_com/app/view/modules/home/views/cart_dialog.dart';
+import 'package:e_com/app/view/modules/cart/cart_dialog.dart';
 import 'package:e_com/app/view/modules/product/product_add_dialog.dart';
 import 'package:e_com/app/view/modules/product/providers/product_provider.dart';
 import 'package:e_com/app/view/theme/colors.dart';
@@ -170,14 +170,17 @@ class _AdminHomeState extends ConsumerState<AdminHome> {
                                             children: [
                                               GestureDetector(
                                                 onTap: () {
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return CartDialog(
-                                                        product: product,
-                                                      );
-                                                    },
-                                                  );
+                                                  if (user != null &&
+                                                      user!.role == Role.user) {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return CartDialog(
+                                                          product: product,
+                                                        );
+                                                      },
+                                                    );
+                                                  }
                                                 },
                                                 child: const CircleAvatar(
                                                   radius: 13,
@@ -191,7 +194,8 @@ class _AdminHomeState extends ConsumerState<AdminHome> {
                                                 ),
                                               ),
                                               if (user != null &&
-                                                  user!.role == Role.admin)
+                                                  user!.role == Role.admin) ...[
+                                                const Gap(8),
                                                 GestureDetector(
                                                   onTap: () {
                                                     _onDeletePressed(
@@ -212,6 +216,7 @@ class _AdminHomeState extends ConsumerState<AdminHome> {
                                                     ),
                                                   ),
                                                 ),
+                                              ],
                                             ],
                                           ),
                                         ),
