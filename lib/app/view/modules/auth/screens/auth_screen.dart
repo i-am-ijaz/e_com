@@ -73,11 +73,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                 PrimaryAppButton(
                   isLoading: ref.watch(authProviderProvider).isLoading,
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
+
                     if (_emailController.text.trim().isEmpty ||
                         _passwordController.text.isEmpty) {
                       showToast('Please fill in all fields');
                       return;
                     }
+
                     if (ref.watch(authProviderProvider).isLoading) return;
                     if (_isLogin) {
                       await ref.read(authProviderProvider.notifier).login(

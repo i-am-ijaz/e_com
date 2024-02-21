@@ -359,9 +359,13 @@ class _ProductAddDialogState extends ConsumerState<ProductAddDialog> {
                 price: double.tryParse(_priceController.text) ?? 0.0,
                 category: _category,
               );
+              if (ref.read(productProviderProvider).isLoading) return;
+
+              showToast('Creating a new Product...');
 
               _createNewCategoryIfNotExits();
 
+              showToast('Please wait...');
               await ref
                   .read(productProviderProvider.notifier)
                   .add(product, _pickedImages);

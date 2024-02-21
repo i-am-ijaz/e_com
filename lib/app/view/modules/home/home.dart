@@ -3,24 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-import 'package:e_com/app/data/models/app_user/app_user.dart';
+import 'package:e_com/app/data/providers/user_provider.dart';
 import 'package:e_com/app/view/modules/home/views/products_listing_view.dart';
 import 'package:e_com/app/view/modules/home/widgets/cart_button.dart';
 import 'package:e_com/app/view/modules/product/product_add_dialog.dart';
+import 'package:e_com/global/enum/enum.dart';
 import 'package:e_com/global/widgets/primary_app_bar.dart';
 
-class AdminHome extends ConsumerStatefulWidget {
+class AdminHome extends ConsumerWidget {
   const AdminHome({super.key});
 
   @override
-  ConsumerState<AdminHome> createState() => _AdminHomeState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProviderProvider).value;
 
-class _AdminHomeState extends ConsumerState<AdminHome> {
-  AppUser? user;
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PrimaryAppBar(),
       body: const Column(
@@ -33,19 +29,21 @@ class _AdminHomeState extends ConsumerState<AdminHome> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 1,
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) => const ProductAddDialog(),
-          );
-        },
-        child: const Icon(
-          Icons.add,
-          size: 40,
-        ),
-      ),
+      floatingActionButton: user?.role == Role.admin
+          ? FloatingActionButton(
+              elevation: 1,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const ProductAddDialog(),
+                );
+              },
+              child: const Icon(
+                Icons.add,
+                size: 40,
+              ),
+            )
+          : null,
     );
   }
 }
